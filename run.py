@@ -64,28 +64,24 @@ def background_thread():
         count += 1
 
 
-# @app.route('/tool/v1')
-# def index():
-#     return render_template('toolv1.html', async_mode=socketio.async_mode)
-
-
-@app.route('/', defaults={'path': ''})
-def catch_all(path):
-    print(" path:", path, '-->File "run.py", line 72')
-    print(" path:", path, '-->File "run.py", line 72')
-    print(" path:", path, '-->File "run.py", line 72')
-    print(" path:", path, '-->File "run.py", line 72')
-
-    if app.debug:
-        return requests.get('http://localhost:8080/{}'.format(path)).text
-    return render_template("index.html")
+# @app.route('/', defaults={'path': ''})
+# def catch_all(path):
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#
+#     if app.debug:
+#         return requests.get('http://localhost:8080/{}'.format(path)).text
+#     return render_template("index.html")
 
 
 @app.route('/api/toorv1')
 def toorv1():
     return render_template("toolv1.html")
-1
 
+
+@app.route('/api/random')
 def random_number():
     response = {
         'randomNumber': randint(1, 100)
@@ -181,9 +177,51 @@ def test_disconnect():
     print('Client disconnected', request.sid)
 
 
+# @app.route('/', defaults={'path': ''})
+# def catch_all(path):
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#     print(" path:", path, '-->File "run.py", line 72')
+#
+#     if app.debug:
+#         return requests.get('http://localhost:8080/{}'.format(path)).text
+#     return render_template("index.html")
+@app.route('/', defaults={'url': ''})
 @app.route('/<path:url>', methods=['GET', 'POST'])
 def home(url):
     # print("  v2config:", v2config, '-->File "app.py", line 153')
+
+
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" request.url):", request.url, '-->File "run.py", line 211')
+    print(" request.url):", request.url, '-->File "run.py", line 211')
+    print(" request.url):", request.url, '-->File "run.py", line 211')
+    print(" request.url):", request.url, '-->File "run.py", line 211')
+
+    isvue = ("5001" in request.url)
+    print(" isvue:", isvue, '-->File "run.py", line 217')
+    print(" isvue:", isvue, '-->File "run.py", line 217')
+    print(" isvue:", isvue, '-->File "run.py", line 217')
+    print(" isvue:", isvue, '-->File "run.py", line 217')
+
+    if isvue:
+        return requests.get('http://localhost:8080/{}'.format(url)).text
+    # return render_template("index.html")
 
     isstatic = ("stat.ajmide.com" in request.url)
 

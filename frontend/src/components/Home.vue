@@ -1,7 +1,7 @@
-
 <template>
   <div>
-    <p>Home page</p>
+    <pe page
+    </p>
     <p>Home {{tse}}</p>
     <p>Random number from backend: {{ randomNumber }}</p>
     <button @click="getRandom">New random number</button>
@@ -9,37 +9,38 @@
 </template>
 
 <script>
-import axios from 'axios'
-export default {
-  data () {
-    return {
-      randomNumber: 0,
-      tse: 'tsee  asd ddd'
-    }
-  },
-  methods: {
-    getRandomInt (min, max) {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min + 1)) + min
+  import axios from 'axios'
+
+  export default {
+    data() {
+      return {
+        randomNumber: 0,
+        tse: 'tsee  asd ddd'
+      }
     },
-    getRandom () {
-      // this.randomNumber = this.getRandomInt(1, 100)
-      this.randomNumber = this.getRandomFromBackend()
+    methods: {
+      getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      },
+      getRandom() {
+        // this.randomNumber = this.getRandomInt(1, 100)
+        this.randomNumber = this.getRandomFromBackend()
+      },
+      getRandomFromBackend() {
+        const path = `http://localhost:5001/api/random`;
+        axios.get(path)
+          .then(response => {
+            this.randomNumber = response.data.randomNumber
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
     },
-    getRandomFromBackend () {
-      const path = `http://localhost:5001/api/random`
-      axios.get(path)
-      .then(response => {
-        this.randomNumber = response.data.randomNumber
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    created() {
+      this.getRandom()
     }
-  },
-  created () {
-    this.getRandom()
   }
-}
 </script>
