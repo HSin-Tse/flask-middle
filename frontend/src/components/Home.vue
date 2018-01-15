@@ -53,7 +53,15 @@
     sockets: {
       connect() {
         console.log('socket connected')
-      }
+      },
+      init() {
+        console.log('socket init')
+      },
+      my_response(msg) {
+        console.log('socket my_response msg:'+msg.t1);
+        console.log('socket my_response msg:'+msg.body);
+      },
+
     }
   }
 </script>
