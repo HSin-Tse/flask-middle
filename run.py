@@ -60,7 +60,7 @@ def background_thread():
         count += 1
 
 
-@app.route('/api/toorv1')
+@app.route('/toorv1')
 def toorv1():
     return render_template("toolv1.html")
 
