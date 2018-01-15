@@ -64,6 +64,7 @@
         where: 'where',
         tse: '',
         tableData: [],
+        clickitems: [],
         formThead: ['t1', 'vlu'],
       }
     },
@@ -87,6 +88,24 @@
             console.log(error)
           })
       },
+      getClicksItems() {
+        const path = `http://localhost:5001/api/clickitems/v2`;
+        axios.get(path)
+          .then(response => {
+//            console.log('response.data:'+response.data[30].t1);
+            this.clickitems = response.data
+            // 快速的代码
+
+// for 循环
+            var length = this.clickitems.length;
+            for (var i = 0; i < length; i++) {
+              console.log(this.clickitems[i]);
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
       deleteRow(index, rows) {
         this.tableData.splice(index, 1);
       },
@@ -94,8 +113,8 @@
         var k = (row.t1 === "error");
         var l = typeof(row.t1) == undefined;
 
-        console.log(rowIndex + '|' + k + '|' + row.t1 + '|' + l);
-        console.log(row);
+//        console.log(rowIndex + '|' + k + '|' + row.t1 + '|' + l);
+//        console.log(row);
         if (k) {
           return 'warning-row';
         } else {
@@ -111,7 +130,8 @@
       show: function () {
 
 
-        alert(""+this.formThead)
+//        alert(""+this.formThead)
+        alert("" + this.clickitems)
       }
       ,
       clean: function () {
@@ -119,9 +139,14 @@
         this.tableData = [];
 
       },
-      addLog: function ( msg) {
+      addLog: function (msg) {
+
+
+
+
 
         msg.ID = this.total;
+
 
         this.tableData.unshift(
           msg
@@ -130,6 +155,7 @@
     },
     created() {
 
+      this.getClicksItems();
       this.getRandom();
       var namespace = '/test';
 
@@ -138,7 +164,7 @@
     sockets: {
       connect() {
         console.log('socket connected')
-        this.$socket.emit('my_event', {data: 'I\'m connected!'});
+//        this.$socket.emit('my_event', {data: 'I\'m connected!'});
 
       },
       init(msg) {
@@ -147,9 +173,8 @@
 
       },
       my_response(msg) {
-        console.log('socket my_response msg:' + msg.body);
         this.total++
-        this.addLog( msg);
+        this.addLog(msg);
 
       },
 

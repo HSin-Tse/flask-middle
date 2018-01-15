@@ -65,6 +65,34 @@ def toorv1():
     return render_template("toolv1.html")
 
 
+@app.route('/api/clickitems/v2')
+def clickitems_v2():
+    with open(os.path.join(APP_STATIC_TXT, 'v2clickitems.json'), encoding='utf-8') as f:
+        s = f.readlines()
+
+        doc = json.loads(''.join(s))
+        v2config = doc
+        f.close()
+    response = {
+        'randomNumber': randint(1, 100)
+    }
+    return jsonify(doc)
+
+
+@app.route('/api/click/v2')
+def click_v2():
+    with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
+        s = f.readlines()
+
+        doc = json.loads(''.join(s))
+        v2config = doc
+        f.close()
+    response = {
+        'randomNumber': randint(1, 100)
+    }
+    return jsonify(doc)
+
+
 @app.route('/api/random')
 def random_number():
     response = {
@@ -80,30 +108,16 @@ def test_message(message):
          {'URL': message['data'], 'ID': session['receive_count']})
 
 
-@socketio.on('my_broadcast_event', namespace='/test')
-def test_broadcast_message(message):
-    session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
-         {'data': message['data'], 'count': session['receive_count']},
-         broadcast=True)
 
 
 
-
-
-@socketio.on('my_room_event', namespace='/test')
-def send_room_message(message):
-    session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
-         {'data': message['data'], 'count': session['receive_count']},
-         room=message['room'])
 
 
 @socketio.on('disconnect_request', namespace='/test')
 def disconnect_request():
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response',
-         {'data': 'Disconnected!', 'count': session['receive_count']})
+    # emit('my_response',
+    #      {'data': 'Disconnected!', 'count': session['receive_count']})
     disconnect()
 
 
@@ -129,7 +143,7 @@ def test_connect():
         # v2config[i][key1] = argu.get(key1, 'error')
         tse[key1] = key1
 
-    emit('my_response', tse)
+    # emit('my_response', tse)
     emit('init', tse)
 
 
@@ -214,9 +228,6 @@ def home(url):
             resp_headers.append((name, value))
 
         response = Response(resp.content, resp.status_code, resp_headers)
-        print(" response:", response, '-->File "run.py", line 255')
-        print(" response:", response, '-->File "run.py", line 255')
-        print(" response:", response, '-->File "run.py", line 255')
         print(" response:", response, '-->File "run.py", line 255')
 
         return response
