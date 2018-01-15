@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Ajmide Static Tool</h1>
-
+    <el-button type="danger">危险按钮</el-button>
     <h1>Home {{where}}</h1>
     <p>Home {{tse}}</p>
     <p>Random number from backend: {{ randomNumber }}</p>
