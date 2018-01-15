@@ -10,12 +10,7 @@
 <script>
   import axios from 'axios';
   import Vue from 'vue';
-  import socketio from 'socket.io-client';
-//  var VueSocketio = require('vue-socket.io');
   var namespace = '/test';
-  export const SocketInstance = socketio((location.protocol + '//' + document.domain + ':5001' + namespace));
-  console.log((location.protocol + '//' + document.domain + ':' + location.port + namespace));
-//  Vue.use(VueSocketio, SocketInstance);
   import VueSocketio from 'vue-socket.io';
   Vue.use(VueSocketio, location.protocol + '//' + document.domain + ':5001' + namespace);
   export default {
