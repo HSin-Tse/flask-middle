@@ -1741,6 +1741,10 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+downloadjs@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/downloadjs/-/downloadjs-1.4.7.tgz#f69f96f940e0d0553dac291139865a3cd0101e3c"
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -5169,6 +5173,12 @@ vm-browserify@0.0.4:
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"
+
+vue-json-excel@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/vue-json-excel/-/vue-json-excel-0.1.7.tgz#c9ecc3df73bb761f481076b17c4f47f9c8fe882f"
+  dependencies:
+    downloadjs "^1.4.7"
 
 vue-loader@^13.3.0:
   version "13.7.0"

@@ -5,15 +5,23 @@
         <h1>Ajmide Static Tool {{where}}</h1>
 
       <h2>Receive:</h2>
+        <download-excel
+          class   = "btn btn-default"
+          :data   = "tableData"
+          type    = "csv"
 
+          name    = "tse.csv">
+          Download data
+
+        </download-excel>
         <el-button  style="margin-bottom: 20px" type="danger"  @click="clean">clear data</el-button>
 
         <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
-          <el-table-column fixed prop="date" label="ID" width="60">
+          <el-table-column fixed prop="ID" label="ID" width="60">
           </el-table-column>
-          <el-table-column prop="name" label="URL" width="600">
+          <el-table-column prop="URL" label="URL" width="600">
           </el-table-column>
-          <el-table-column prop="address" label="body">
+          <el-table-column prop="body" label="body">
           </el-table-column>
           <!--<el-table-column prop="t1" label="t1">-->
           <!--</el-table-column>-->
@@ -45,7 +53,9 @@
 
   var namespace = '/test';
   import VueSocketio from 'vue-socket.io';
+  import JsonExcel from 'vue-json-excel';
 
+  Vue.component('downloadExcel', JsonExcel);
   Vue.use(VueSocketio, location.protocol + '//' + document.domain + ':5001' + namespace);
   export default {
     data() {
@@ -107,9 +117,9 @@
       },
       addLog: function (a, b, c, t1, msg) {
 
-        msg.date = a;
-        msg.name = b;
-        msg.address = c;
+        msg.ID = a;
+        msg.URL = b;
+        msg.body = c;
         this.tableData.unshift(
           msg
         );
