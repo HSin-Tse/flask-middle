@@ -18,7 +18,7 @@
       <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
         <el-table-column fixed prop="ID" label="ID" width="60">
         </el-table-column>
-        <el-table-column fixed prop="busi" label="busi" width="60">
+        <el-table-column fixed prop="busi" label="busi" width="120">
         </el-table-column>
         <el-table-column prop="URL" label="URL" width="600">
         </el-table-column>
@@ -145,7 +145,7 @@
           var ispg =  this.clickitems[i].pg == msg.pg
           var isblk =  this.clickitems[i].blk == msg.blk
           if (isbt & isctl & ispg & isblk) {
-            msg.busi =  this.clickitems[i]["埋点业务"]
+            msg.busi =  i+':'+this.clickitems[i]["埋点业务"]
             break
           } else {
             msg.busi = "nonono"
