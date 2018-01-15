@@ -1,6 +1,6 @@
 <template>
   <div>
-    </p>
+    <h1>Home {{where}}</h1>
     <p>Home {{tse}}</p>
     <p>Random number from backend: {{ randomNumber }}</p>
     <button @click="getRandom">New random number</button>
@@ -8,12 +8,21 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
+  import axios from 'axios';
+  import Vue from 'vue';
+  import socketio from 'socket.io-client';
+//  var VueSocketio = require('vue-socket.io');
+  var namespace = '/test';
+  export const SocketInstance = socketio((location.protocol + '//' + document.domain + ':5001' + namespace));
+  console.log((location.protocol + '//' + document.domain + ':' + location.port + namespace));
+//  Vue.use(VueSocketio, SocketInstance);
+  import VueSocketio from 'vue-socket.io';
+  Vue.use(VueSocketio, location.protocol + '//' + document.domain + ':5001' + namespace);
   export default {
     data() {
       return {
         randomNumber: 0,
+        where: 'where',
         tse: 'tsee  asd ddd'
       }
     },
@@ -39,7 +48,15 @@
       }
     },
     created() {
-      this.getRandom()
+      this.getRandom();
+      var namespace = '/test';
+
+      this.where = (location.protocol + '//' + document.domain + ':' + location.port + namespace);
+    },
+    sockets: {
+      connect() {
+        console.log('socket connected')
+      }
     }
   }
 </script>
