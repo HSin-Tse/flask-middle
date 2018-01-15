@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1>Ajmide Static Tool</h1>
+
     <h1>Home {{where}}</h1>
     <p>Home {{tse}}</p>
     <p>Random number from backend: {{ randomNumber }}</p>

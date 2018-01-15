@@ -42,7 +42,6 @@ thread_lock = Lock()
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_top
 APP_STATIC_TXT = os.path.join(APP_ROOT, 'static/jsons')  # 设置一个专门的类似全局变量的东西
 
-
 v2config = []
 with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
     s = f.readlines()  # 读取前五个字节
@@ -61,7 +60,7 @@ def background_thread():
         count += 1
 
 
-@app.route('/toorv1')
+@app.route('/api/toorv1')
 def toorv1():
     return render_template("toolv1.html")
 
@@ -188,11 +187,6 @@ def home(url):
     print(" url:", url, '-->File "run.py", line 184')
     print(" url:", url, '-->File "run.py", line 184')
     print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
     print(" request.url):", request.url, '-->File "run.py", line 211')
     print(" request.url):", request.url, '-->File "run.py", line 211')
     print(" request.url):", request.url, '-->File "run.py", line 211')
@@ -235,9 +229,7 @@ def home(url):
 
         if (request.method == 'POST'):
             print(" request.url:", request.args, '-->File "runProxy.py", line 12')
-            # print(" request.method:", request.method, '-->File "app.py", line 127')
-
-        return ""
+            return ""
 
     with closing(
 
@@ -260,6 +252,10 @@ def home(url):
             resp_headers.append((name, value))
 
         response = Response(resp.content, resp.status_code, resp_headers)
+        print(" response:", response, '-->File "run.py", line 255')
+        print(" response:", response, '-->File "run.py", line 255')
+        print(" response:", response, '-->File "run.py", line 255')
+        print(" response:", response, '-->File "run.py", line 255')
 
         return response
 

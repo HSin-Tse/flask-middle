@@ -37,7 +37,7 @@
                 </el-table-column>
                 <!--<el-table-column prop="t1" label="t1">-->
                 <!--</el-table-column>-->
-                <el-table-column :key='fruit' v-for='(fruit,index) in formThead' :prop="fruit" :label="fruit">
+                <el-table-column :key='fruit' v-for='(fruit,index) in formThead'  :prop="fruit" :label="fruit">
                 </el-table-column>
 
                 <el-table-column
@@ -63,160 +63,174 @@
 </body>
 <script>
 
-    var Main = {
-        created: function () {
+var Main = {
+    created: function () {
 
-            var total = 0;
-            $(document).ready(function () {
+        var total=0;
+        $(document).ready(function() {
 
-                namespace = '/test';
-
-
-                var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
-                console.log(socket);
+            namespace = '/test';
 
 
-                socket.on('connect', function (msg) {
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+            console.log(socket);
 
 
-                    socket.emit('my_event', {data: 'I\'m connected!'});
-                });
+            socket.on('connect', function(msg) {
 
 
-                var ping_pong_times = [];
-                var start_time;
-                window.setInterval(function () {
-                    start_time = (new Date).getTime();
-                    socket.emit('my_ping');
-                }, 1000);
-
-                // Handler for the "pong" message. When the pong is received, the
-                // time from the ping is stored, and the average of the last 30
-                // samples is average and displayed.
-                socket.on('my_pong', function () {
-                    var latency = (new Date).getTime() - start_time;
-                    ping_pong_times.push(latency);
-                    ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
-                    var sum = 0;
-                    for (var i = 0; i < ping_pong_times.length; i++)
-                        sum += ping_pong_times[i];
-                    $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
-                });
-
-                // Handlers for the different forms in the page.
-                // These accept data from the user and send it to the server in a
-                // variety of ways
-                $('form#emit').submit(function (event) {
-                    socket.emit('my_event', {data: $('#emit_data').val()});
-                    return false;
-                });
-                $('form#broadcast').submit(function (event) {
-                    socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
-                    return false;
-                });
-                $('form#join').submit(function (event) {
-                    socket.emit('join', {room: $('#join_room').val()});
-                    return false;
-                });
-                $('form#leave').submit(function (event) {
-                    socket.emit('leave', {room: $('#leave_room').val()});
-                    return false;
-                });
-                $('form#send_room').submit(function (event) {
-                    socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
-                    return false;
-                });
-                $('form#close').submit(function (event) {
-                    socket.emit('close_room', {room: $('#close_room').val()});
-                    return false;
-                });
-                $('form#disconnect').submit(function (event) {
-                    socket.emit('disconnect_request');
-                    return false;
-                });
-
-
-                socket.on('my_response', function (msg) {
-
-                    total++;
-                    ctt.addLog(total, msg.data, msg.body, msg.t1, msg);
-
-                });
-
-                socket.on('init', function (msg) {
-                    ctt.intitial(msg);
-
-                });
+                socket.emit('my_event', {data: 'I\'m connected!'});
             });
 
 
-        },
-        methods: {
-
-            deleteRow(index, rows) {
-                this.tableData.splice(index, 1);
-            },
-            tableRowClassName({row, rowIndex}) {
-                var k = (row.t1 === "error");
-                var l = typeof(row.t1) == undefined;
-
-                console.log(rowIndex + '|' + k + '|' + row.t1 + '|' + l);
-                console.log(row);
-                if (k) {
-                    return 'warning-row';
-                } else {
-                    return 'success-row';
-                }
-            }
-
-            ,
-            intitial: function (data) {
-
-                this.formThead = data;
-            }
-            ,
-            clean: function () {
-
-                this.tableData = [];
-
-            },
-            addLog: function (a, b, c, t1, msg) {
-
-                msg.date = a;
-                msg.name = b;
-                msg.address = c;
-                this.tableData.unshift(
-                    msg
-                );
-            },
-        },
-        data() {
-            return {
-                tableData: []
-                ,
-                formThead: ['t1', 'vlu'],
 
 
-            }
+
+            var ping_pong_times = [];
+            var start_time;
+            window.setInterval(function() {
+                start_time = (new Date).getTime();
+                socket.emit('my_ping');
+            }, 1000);
+
+            // Handler for the "pong" message. When the pong is received, the
+            // time from the ping is stored, and the average of the last 30
+            // samples is average and displayed.
+            socket.on('my_pong', function() {
+                var latency = (new Date).getTime() - start_time;
+                ping_pong_times.push(latency);
+                ping_pong_times = ping_pong_times.slice(-30); // keep last 30 samples
+                var sum = 0;
+                for (var i = 0; i < ping_pong_times.length; i++)
+                    sum += ping_pong_times[i];
+                $('#ping-pong').text(Math.round(10 * sum / ping_pong_times.length) / 10);
+            });
+
+            // Handlers for the different forms in the page.
+            // These accept data from the user and send it to the server in a
+            // variety of ways
+            $('form#emit').submit(function(event) {
+                socket.emit('my_event', {data: $('#emit_data').val()});
+                return false;
+            });
+            $('form#broadcast').submit(function(event) {
+                socket.emit('my_broadcast_event', {data: $('#broadcast_data').val()});
+                return false;
+            });
+            $('form#join').submit(function(event) {
+                socket.emit('join', {room: $('#join_room').val()});
+                return false;
+            });
+            $('form#leave').submit(function(event) {
+                socket.emit('leave', {room: $('#leave_room').val()});
+                return false;
+            });
+            $('form#send_room').submit(function(event) {
+                socket.emit('my_room_event', {room: $('#room_name').val(), data: $('#room_data').val()});
+                return false;
+            });
+            $('form#close').submit(function(event) {
+                socket.emit('close_room', {room: $('#close_room').val()});
+                return false;
+            });
+            $('form#disconnect').submit(function(event) {
+                socket.emit('disconnect_request');
+                return false;
+            });
+
+
+            socket.on('my_response', function(msg) {
+
+               total++;
+               ctt.addLog(total,msg.data,msg.body,msg.t1,msg);
+
+            });
+
+            socket.on('init', function(msg) {
+                ctt.intitial(msg);
+
+            });
+        });
+
+
+    },
+    methods:{
+
+       deleteRow(index, rows) {
+        this.tableData.splice(index, 1);
+      },
+      tableRowClassName({row, rowIndex}) {
+          var  k=(row.t1 ==="error");
+          var  l=typeof(row.t1) ==undefined;
+
+           console.log(rowIndex +'|'+k+'|'+row.t1 +'|'+l);
+           console.log(row);
+           if(k){
+            return 'warning-row';
+          }else {
+            return 'success-row';
+          }
         }
+
+      ,
+      intitial:function(data){
+
+      this.formThead=data;
+      }
+      ,
+      clean: function(){
+
+         this.tableData=[];
+
+       },
+       addLog: function(a,b,c,t1,msg){
+
+       msg.date=a;
+       msg.name=b;
+       msg.address=c;
+         this.tableData.unshift(
+
+
+           msg
+
+          );
+       },
+    },
+    data() {
+      return {
+        tableData: [
+
+        ]
+        ,
+        formThead:['t1','vlu'],
+
+
+      }
     }
-    var Ctor = Vue.extend(Main)
-    var ctt = new Ctor().$mount('#app')
+  }
+var Ctor = Vue.extend(Main)
+var ctt=new Ctor().$mount('#app')
+
+
 
 
 </script>
 <style>
-    .el-table .warning-row {
-        background: #FF5151;
-    }
+  .el-table .warning-row {
+    background: #FF5151;
+  }
 
-    .el-table .success-row {
-        background: #f0f9eb;
-    }
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
+   .el-table .no-row {
+    background: #00ffff
+  }
 
-    .el-table .no-row {
-        background: #00ffff
-    }
+
+
+
+
 
 
 </style>
