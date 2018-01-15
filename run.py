@@ -155,24 +155,9 @@ def home(url):
 
 
     print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" request.url):", request.url, '-->File "run.py", line 211')
-    print(" request.url):", request.url, '-->File "run.py", line 211')
-    print(" request.url):", request.url, '-->File "run.py", line 211')
     print(" request.url):", request.url, '-->File "run.py", line 211')
 
     isvue = ("5001" in request.url)
-    print(" isvue:", isvue, '-->File "run.py", line 217')
-    print(" isvue:", isvue, '-->File "run.py", line 217')
-    print(" isvue:", isvue, '-->File "run.py", line 217')
     print(" isvue:", isvue, '-->File "run.py", line 217')
 
     if isvue:
