@@ -1,16 +1,13 @@
 <template>
   <div>
-    <h1>Ajmide Static Tool</h1>
-    <h1>Home {{where}}</h1>
 
-    <div id="app">
-      <el-button type="danger" @click="clean">clear data</el-button>
+      <div class="container-fluid">
+        <h1>Ajmide Static Tool {{where}}</h1>
 
-      <p>Average ping/pong latency: <b><span id="ping-pong"></span>ms</b></p>
       <h2>Receive:</h2>
-      <!--<h2>{{tableData}}:</h2>-->
 
-      <template>
+        <el-button  style="margin-bottom: 20px" type="danger"  @click="clean">clear data</el-button>
+
         <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
           <el-table-column fixed prop="date" label="ID" width="60">
           </el-table-column>
@@ -37,7 +34,7 @@
             </template>
           </el-table-column>
         </el-table>
-      </template>
+
     </div>
   </div>
 </template>
