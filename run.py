@@ -135,7 +135,7 @@ def test_connect():
             thread = socketio.start_background_task(target=background_thread)
 
     tse = {
-        'URL': "init"
+        # 'URL': "init"
     }
     for i in range(len(v2config)):
         # print(" v2config:", v2config[i], '-->File "app.py", line 169')

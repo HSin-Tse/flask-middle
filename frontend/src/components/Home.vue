@@ -18,6 +18,8 @@
       <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
         <el-table-column fixed prop="ID" label="ID" width="60">
         </el-table-column>
+        <el-table-column fixed prop="busi" label="busi" width="60">
+        </el-table-column>
         <el-table-column prop="URL" label="URL" width="600">
         </el-table-column>
         <el-table-column prop="body" label="body">
@@ -111,10 +113,6 @@
       },
       tableRowClassName({row, rowIndex}) {
         var k = (row.t1 === "error");
-        var l = typeof(row.t1) == undefined;
-
-//        console.log(rowIndex + '|' + k + '|' + row.t1 + '|' + l);
-//        console.log(row);
         if (k) {
           return 'warning-row';
         } else {
@@ -128,9 +126,6 @@
         this.formThead = data;
       },
       show: function () {
-
-
-//        alert(""+this.formThead)
         alert("" + this.clickitems)
       }
       ,
@@ -142,8 +137,21 @@
       addLog: function (msg) {
 
 
+        var length = this.clickitems.length;
+        for (var i = 0; i < length; i++) {
+          console.log(this.clickitems[i]);
+          var isbt =  this.clickitems[i].bt == msg.bt
+          var isctl =  this.clickitems[i].ctl == msg.ctl
+          var ispg =  this.clickitems[i].pg == msg.pg
+          var isblk =  this.clickitems[i].blk == msg.blk
+          if (isbt & isctl & ispg & isblk) {
+            msg.busi =  this.clickitems[i]["埋点业务"]
+            break
+          } else {
+            msg.busi = "nonono"
 
-
+          }
+        }
 
         msg.ID = this.total;
 
