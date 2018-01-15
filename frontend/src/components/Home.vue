@@ -1,6 +1,5 @@
 <template>
   <div>
-    <pe page
     </p>
     <p>Home {{tse}}</p>
     <p>Random number from backend: {{ randomNumber }}</p>

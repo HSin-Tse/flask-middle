@@ -42,9 +42,6 @@ thread_lock = Lock()
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_top
 APP_STATIC_TXT = os.path.join(APP_ROOT, 'static/jsons')  # 设置一个专门的类似全局变量的东西
 
-# print(" APP_STATIC_TXT:", APP_STATIC_TXT, '-->File "app.py", line 40')
-# print(" APP_STATIC_TXT:", APP_STATIC_TXT, '-->File "app.py", line 40')
-# print(" APP_STATIC_TXT:", APP_STATIC_TXT, '-->File "app.py", line 40')
 
 v2config = []
 with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
@@ -64,19 +61,7 @@ def background_thread():
         count += 1
 
 
-# @app.route('/', defaults={'path': ''})
-# def catch_all(path):
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#
-#     if app.debug:
-#         return requests.get('http://localhost:8080/{}'.format(path)).text
-#     return render_template("index.html")
-
-
-@app.route('/api/toorv1')
+@app.route('/toorv1')
 def toorv1():
     return render_template("toolv1.html")
 
@@ -274,9 +259,6 @@ def home(url):
                 continue
             resp_headers.append((name, value))
 
-        # excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
-        # headers = [(name, value) for (name, value) in resp.raw.headers.items()
-        #            if name.lower() not in excluded_headers]
         response = Response(resp.content, resp.status_code, resp_headers)
 
         return response
