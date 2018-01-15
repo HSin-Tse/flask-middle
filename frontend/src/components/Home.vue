@@ -13,7 +13,7 @@
         Download data
       </download-excel>
       <el-button type="danger" @click="clean">clear data</el-button>
-      <el-button type="success" @click="show">clear data</el-button>
+      <el-button type="success" @click="show">debug</el-button>
 
       <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
         <el-table-column fixed prop="ID" label="ID" width="60">
@@ -62,7 +62,7 @@
         randomNumber: 0,
         total: 0,
         where: 'where',
-        tse: 'tsee  asd ddd',
+        tse: '',
         tableData: [],
         formThead: ['t1', 'vlu'],
       }
@@ -111,7 +111,7 @@
       show: function () {
 
 
-        alert(this.tableData)
+        alert(""+this.formThead)
       }
       ,
       clean: function () {
