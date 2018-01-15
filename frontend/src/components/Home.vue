@@ -1,47 +1,46 @@
 <template>
   <div>
 
-      <div class="container-fluid">
-        <h1>Ajmide Static Tool {{where}}</h1>
+    <div class="container-fluid">
+      <h1>Ajmide Static Tool {{where}}</h1>
 
       <h2>Receive:</h2>
-        <download-excel
-          class   = "btn btn-default"
-          :data   = "tableData"
-          type    = "csv"
+      <download-excel
+        class="btn btn-primary"
+        :data="tableData"
+        type="csv"
+        name="tse.csv">
+        Download data
+      </download-excel>
+      <el-button type="danger" @click="clean">clear data</el-button>
+      <el-button type="success" @click="show">clear data</el-button>
 
-          name    = "tse.csv">
-          Download data
+      <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
+        <el-table-column fixed prop="ID" label="ID" width="60">
+        </el-table-column>
+        <el-table-column prop="URL" label="URL" width="600">
+        </el-table-column>
+        <el-table-column prop="body" label="body">
+        </el-table-column>
+        <!--<el-table-column prop="t1" label="t1">-->
+        <!--</el-table-column>-->
+        <el-table-column :key='fruit' v-for='(fruit,index) in formThead' :prop="fruit" :label="fruit">
+        </el-table-column>
 
-        </download-excel>
-        <el-button  style="margin-bottom: 20px" type="danger"  @click="clean">clear data</el-button>
-
-        <el-table border :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
-          <el-table-column fixed prop="ID" label="ID" width="60">
-          </el-table-column>
-          <el-table-column prop="URL" label="URL" width="600">
-          </el-table-column>
-          <el-table-column prop="body" label="body">
-          </el-table-column>
-          <!--<el-table-column prop="t1" label="t1">-->
-          <!--</el-table-column>-->
-          <el-table-column :key='fruit' v-for='(fruit,index) in formThead' :prop="fruit" :label="fruit">
-          </el-table-column>
-
-          <el-table-column
-            fixed="right"
-            label="操作"
-            width="120">
-            <template slot-scope="scope">
-              <el-button
-                @click.native.prevent="deleteRow(scope.$index, tableData)"
-                type="danger"
-                size="small">
-                移除
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="120">
+          <template slot-scope="scope">
+            <el-button
+              @click.native.prevent="deleteRow(scope.$index, tableData)"
+              type="danger"
+              size="small">
+              移除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
 
     </div>
   </div>
@@ -108,6 +107,11 @@
       intitial: function (data) {
 
         this.formThead = data;
+      },
+      show: function () {
+
+
+        alert(this.tableData)
       }
       ,
       clean: function () {
@@ -115,11 +119,10 @@
         this.tableData = [];
 
       },
-      addLog: function (a, b, c, t1, msg) {
+      addLog: function ( msg) {
 
-        msg.ID = a;
-        msg.URL = b;
-        msg.body = c;
+        msg.ID = this.total;
+
         this.tableData.unshift(
           msg
         );
@@ -144,10 +147,9 @@
 
       },
       my_response(msg) {
-        console.log('socket my_response msg:' + msg.t1);
         console.log('socket my_response msg:' + msg.body);
         this.total++
-        this.addLog(this.total, msg.data, msg.body, msg.t1, msg);
+        this.addLog( msg);
 
       },
 

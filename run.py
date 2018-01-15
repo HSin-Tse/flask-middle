@@ -209,8 +209,8 @@ def home(url):
             argu = request.args
 
             tse = {
-                'data': request.url,
-                'count': 0,
+                'ID': -1,
+                'URL': request.url,
                 'body': urllib.parse.unquote(str(request.get_data()))
             }
             for i in range(len(v2config)):
