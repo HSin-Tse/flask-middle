@@ -128,9 +128,6 @@
       }
 
       ,
-      intitial: function (data) {
-//        this.formThead = data;
-      },
       show: function () {
         alert("" + this.clickitems)
       }
@@ -187,7 +184,6 @@
       },
       init(msg) {
         console.log('socket init')
-        this.intitial(msg);
       },
       my_response(msg) {
         this.total++

@@ -158,28 +158,57 @@ def test_disconnect():
 @app.route('/', defaults={'url': ''})
 @app.route('/<path:url>', methods=['GET', 'POST'])
 def home(url):
-    print(" url:", url, '-->File "run.py", line 184')
-    print(" request.url):", request.url, '-->File "run.py", line 211')
-
+    # print(" url:", url, '-->File "run.py", line 184')
+    # print(" request.url):", request.url, '-->File "run.py", line 211')
 
     isaudio = ("t2" in request.url)
-    if isaudio:
-        return ""
+    isv2page = ("p1=" in request.url)
+
     isv1 = ("session" in request.url)
-    if isv1:
-        return ""
 
     isvue = ("5001" in request.url)
-    # print(" isvue:", isvue, '-->File "run.py", line 217')
 
     if isvue:
         return requests.get('http://localhost:8080/{}'.format(url)).text
-    # return render_template("index.html")
 
     isstatic = ("stat.ajmide.com" in request.url)
 
     if (isstatic):
-        if (request.method == 'GET'):
+        print(" isv2page:", isv2page, '-->File "run.py", line 177')
+
+
+
+
+
+        if isv2page:
+            argu = request.args
+
+            tse = {
+                'ID': -1,
+                'URL': request.url,
+                'body': urllib.parse.unquote(str(request.get_data()))
+            }
+            for i in range(len(v2config)):
+                # print(" v2config:", v2config[i], '-->File "app.py", line 169')
+                key1 = v2config[i]['参数']
+                v2config[i][key1] = argu.get(key1, 'error')
+                tse[key1] = argu.get(key1, 'error')
+                # print(" v2config:", v2config[i], '-->File "app.py", line 169')
+            # print(" v2config:", v2config, '-->File "app.py", line 173')
+
+            # print(" tse:", tse, '-->File "app.py", line 182')
+
+            socketio.emit('my_response',
+                          tse,
+                          namespace='/page')
+
+        elif isv1:
+            return ""
+
+        elif isaudio:
+            return ""
+
+        elif (request.method == 'GET'):
             argu = request.args
 
             tse = {
@@ -201,7 +230,7 @@ def home(url):
                           tse,
                           namespace='/test')
 
-        if (request.method == 'POST'):
+        elif (request.method == 'POST'):
             # print(" request.url:", request.args, '-->File "runProxy.py", line 12')
             return ""
 
