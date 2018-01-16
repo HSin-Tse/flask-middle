@@ -100,7 +100,7 @@
           })
       },
       getClickRules() {
-        const path = `http://localhost:5001/api/page/v2`;
+        const path = `http://localhost:5001/api/click/v2`;
         axios.get(path)
           .then(response => {
             console.log('response.data:'+response.data);
@@ -136,7 +136,7 @@
         this.tableData = [];
       },
       addLog: function (msg) {
-
+        console.log(msg)
 
         var length = this.clickitems.length;
         for (var i = 0; i < length; i++) {
@@ -187,6 +187,17 @@
       },
       my_response(msg) {
         this.total++
+        console.log('my_response init')
+
+        console.log(msg.vlu);
+
+
+//        for(var item in msg.vlu) {
+//          console.log(item);
+//          console.log(msg.vlu.item);
+//        }
+
+        msg.vlu=JSON.stringify(msg.vlu)
         this.addLog(msg);
 
       },

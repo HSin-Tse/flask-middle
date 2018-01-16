@@ -119,7 +119,7 @@
         this.tableData.splice(index, 1);
       },
       tableRowClassName({row, rowIndex}) {
-        var k = (row.t1 === "error");
+        var k = (row.busi === "nonono");
         if (k) {
           return 'warning-row';
         } else {
