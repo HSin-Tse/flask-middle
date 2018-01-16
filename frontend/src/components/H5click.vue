@@ -50,7 +50,7 @@
   import axios from 'axios';
   import Vue from 'vue';
 
-  var namespace = '/page';
+  var namespace = '/h5click';
   import VueSocketio from 'vue-socket.io';
   import JsonExcel from 'vue-json-excel';
 

@@ -188,7 +188,25 @@ def home(url):
     ish5 = ("stat.ajmide.com/m.gif" in request.url)
     isstatic = ("stat.ajmide.com" in request.url)
     if ish5:
-        return ""
+        if True:
+            argu = request.args
+
+            tse = {
+                'ID': -1,
+                'URL': request.url,
+                'body': urllib.parse.unquote(str(request.get_data()))
+            }
+            for i in range(len(v2pageconfig)):
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                key1 = v2pageconfig[i]['参数']
+                v2pageconfig[i][key1] = argu.get(key1, 'error')
+                tse[key1] = argu.get(key1, 'error')
+
+            socketio.emit('my_response',
+                          tse,
+                          namespace='/h5click')
 
     elif isstatic:
 
