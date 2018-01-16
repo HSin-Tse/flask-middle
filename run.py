@@ -136,17 +136,17 @@ def test_connect():
         if thread is None:
             thread = socketio.start_background_task(target=background_thread)
 
-    tse = {
-        # 'URL': "init"
-    }
-    for i in range(len(v2config)):
-        # print(" v2config:", v2config[i], '-->File "app.py", line 169')
-        key1 = v2config[i]['参数']
-        # v2config[i][key1] = argu.get(key1, 'error')
-        tse[key1] = key1
-
-    # emit('my_response', tse)
-    emit('init', tse)
+    # tse = {
+    #     # 'URL': "init"
+    # }
+    # for i in range(len(v2config)):
+    #     # print(" v2config:", v2config[i], '-->File "app.py", line 169')
+    #     key1 = v2config[i]['参数']
+    #     # v2config[i][key1] = argu.get(key1, 'error')
+    #     tse[key1] = key1
+    #
+    # # emit('my_response', tse)
+    emit('init')
 
 
 @socketio.on('disconnect', namespace='/test')

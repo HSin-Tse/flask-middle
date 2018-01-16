@@ -50,7 +50,7 @@
   import axios from 'axios';
   import Vue from 'vue';
 
-  var namespace = '/test';
+  var namespace = '/page';
   import VueSocketio from 'vue-socket.io';
   import JsonExcel from 'vue-json-excel';
 
@@ -93,14 +93,29 @@
         const path = `http://localhost:5001/api/clickitems/v2`;
         axios.get(path)
           .then(response => {
-//            console.log('response.data:'+response.data[30].t1);
             this.clickitems = response.data
           })
           .catch(error => {
             console.log(error)
           })
       },
-      deleteRow(index, rows) {
+      getClickRules() {
+        const path = `http://localhost:5001/api/click/v2`;
+        axios.get(path)
+          .then(response => {
+            console.log('response.data:'+response.data);
+            console.log('response.data:'+response.data);
+            console.log('response.data:'+response.data);
+
+            this.formThead = response.data
+          })
+          .catch(error => {
+            console.log(error)
+            console.log('error:'+error);
+            console.log('error:'+error);
+            console.log('error:'+error);
+          })
+      },      deleteRow(index, rows) {
         this.tableData.splice(index, 1);
       },
       tableRowClassName({row, rowIndex}) {
@@ -113,9 +128,6 @@
       }
 
       ,
-      intitial: function (data) {
-        this.formThead = data;
-      },
       show: function () {
         alert("" + this.clickitems)
       }
@@ -152,6 +164,7 @@
     },
     created() {
 
+      this.getClickRules();
       this.getClicksItems();
       this.getRandom();
       var namespace = '/test';
@@ -171,7 +184,6 @@
       },
       init(msg) {
         console.log('socket init')
-        this.intitial(msg);
       },
       my_response(msg) {
         this.total++
