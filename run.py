@@ -86,11 +86,18 @@ def click_v2():
 
         doc = json.loads(''.join(s))
         v2config = doc
+
+        tse = {
+            # 'URL': "init"
+        }
+        for i in range(len(v2config)):
+            # print(" v2config:", v2config[i], '-->File "app.py", line 169')
+            key1 = v2config[i]['参数']
+            # v2config[i][key1] = argu.get(key1, 'error')
+            tse[key1] = key1
+
         f.close()
-    response = {
-        'randomNumber': randint(1, 100)
-    }
-    return jsonify(doc)
+    return jsonify(tse)
 
 
 @app.route('/api/random')
@@ -106,11 +113,6 @@ def test_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
     emit('my_response',
          {'URL': message['data'], 'ID': session['receive_count']})
-
-
-
-
-
 
 
 @socketio.on('disconnect_request', namespace='/test')
@@ -150,29 +152,25 @@ def test_connect():
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected', request.sid)
+    emit('disconnect')
 
 
-# @app.route('/', defaults={'path': ''})
-# def catch_all(path):
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#     print(" path:", path, '-->File "run.py", line 72')
-#
-#     if app.debug:
-#         return requests.get('http://localhost:8080/{}'.format(path)).text
-#     return render_template("index.html")
 @app.route('/', defaults={'url': ''})
 @app.route('/<path:url>', methods=['GET', 'POST'])
 def home(url):
-    # print("  v2config:", v2config, '-->File "app.py", line 153')
-
-
     print(" url:", url, '-->File "run.py", line 184')
     print(" request.url):", request.url, '-->File "run.py", line 211')
 
+
+    isaudio = ("t2" in request.url)
+    if isaudio:
+        return ""
+    isv1 = ("session" in request.url)
+    if isv1:
+        return ""
+
     isvue = ("5001" in request.url)
-    print(" isvue:", isvue, '-->File "run.py", line 217')
+    # print(" isvue:", isvue, '-->File "run.py", line 217')
 
     if isvue:
         return requests.get('http://localhost:8080/{}'.format(url)).text
@@ -197,14 +195,14 @@ def home(url):
                 # print(" v2config:", v2config[i], '-->File "app.py", line 169')
             # print(" v2config:", v2config, '-->File "app.py", line 173')
 
-            print(" tse:", tse, '-->File "app.py", line 182')
+            # print(" tse:", tse, '-->File "app.py", line 182')
 
             socketio.emit('my_response',
                           tse,
                           namespace='/test')
 
         if (request.method == 'POST'):
-            print(" request.url:", request.args, '-->File "runProxy.py", line 12')
+            # print(" request.url:", request.args, '-->File "runProxy.py", line 12')
             return ""
 
     with closing(
@@ -228,7 +226,7 @@ def home(url):
             resp_headers.append((name, value))
 
         response = Response(resp.content, resp.status_code, resp_headers)
-        print(" response:", response, '-->File "run.py", line 255')
+        # print(" response:", response, '-->File "run.py", line 255')
 
         return response
 

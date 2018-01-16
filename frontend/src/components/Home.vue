@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <h1>Ajmide Static Tool {{where}}</h1>
 
-      <h2>Receive:</h2>
+      <h2>Receive:{{ conected}}</h2>
       <download-excel
         class="btn btn-primary"
         :data="tableData"
@@ -24,8 +24,6 @@
         </el-table-column>
         <el-table-column prop="body" label="body">
         </el-table-column>
-        <!--<el-table-column prop="t1" label="t1">-->
-        <!--</el-table-column>-->
         <el-table-column :key='fruit' v-for='(fruit,index) in formThead' :prop="fruit" :label="fruit">
         </el-table-column>
 
@@ -61,6 +59,7 @@
   export default {
     data() {
       return {
+        conected: 'disconnect',
         randomNumber: 0,
         total: 0,
         where: 'where',
@@ -94,21 +93,29 @@
         const path = `http://localhost:5001/api/clickitems/v2`;
         axios.get(path)
           .then(response => {
-//            console.log('response.data:'+response.data[30].t1);
             this.clickitems = response.data
-            // 快速的代码
-
-// for 循环
-            var length = this.clickitems.length;
-            for (var i = 0; i < length; i++) {
-              console.log(this.clickitems[i]);
-            }
           })
           .catch(error => {
             console.log(error)
           })
       },
-      deleteRow(index, rows) {
+      getClickRules() {
+        const path = `http://localhost:5001/api/click/v2`;
+        axios.get(path)
+          .then(response => {
+            console.log('response.data:'+response.data);
+            console.log('response.data:'+response.data);
+            console.log('response.data:'+response.data);
+
+            this.formThead = response.data
+          })
+          .catch(error => {
+            console.log(error)
+            console.log('error:'+error);
+            console.log('error:'+error);
+            console.log('error:'+error);
+          })
+      },      deleteRow(index, rows) {
         this.tableData.splice(index, 1);
       },
       tableRowClassName({row, rowIndex}) {
@@ -122,30 +129,27 @@
 
       ,
       intitial: function (data) {
-
-        this.formThead = data;
+//        this.formThead = data;
       },
       show: function () {
         alert("" + this.clickitems)
       }
       ,
       clean: function () {
-
         this.tableData = [];
-
       },
       addLog: function (msg) {
 
 
         var length = this.clickitems.length;
         for (var i = 0; i < length; i++) {
-          console.log(this.clickitems[i]);
-          var isbt =  this.clickitems[i].bt == msg.bt
-          var isctl =  this.clickitems[i].ctl == msg.ctl
-          var ispg =  this.clickitems[i].pg == msg.pg
-          var isblk =  this.clickitems[i].blk == msg.blk
+//          console.log(this.clickitems[i]);
+          var isbt = this.clickitems[i].bt == msg.bt
+          var isctl = this.clickitems[i].ctl == msg.ctl
+          var ispg = this.clickitems[i].pg == msg.pg
+          var isblk = this.clickitems[i].blk == msg.blk
           if (isbt & isctl & ispg & isblk) {
-            msg.busi =  i+':'+this.clickitems[i]["埋点业务"]
+            msg.busi = i + ':' + this.clickitems[i]["埋点业务"]
             break
           } else {
             msg.busi = "nonono"
@@ -163,6 +167,7 @@
     },
     created() {
 
+      this.getClickRules();
       this.getClicksItems();
       this.getRandom();
       var namespace = '/test';
@@ -171,14 +176,18 @@
     },
     sockets: {
       connect() {
-        console.log('socket connected')
-//        this.$socket.emit('my_event', {data: 'I\'m connected!'});
+        console.log('connect')
 
+        this.conected = (' connected')
+      },
+      disconnect() {
+        console.log('disconnect')
+
+        this.conected = ('server disconnect')
       },
       init(msg) {
         console.log('socket init')
         this.intitial(msg);
-
       },
       my_response(msg) {
         this.total++
