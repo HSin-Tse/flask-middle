@@ -197,30 +197,14 @@ def home(url):
                 'body': urllib.parse.unquote(str(request.get_data()))
             }
             values = argu.get('ajmd', 'error')
-            print(" values:", values, '-->File "run.py", line 200')
-            print(" values:", values, '-->File "run.py", line 200')
-            print(" values:", values, '-->File "run.py", line 200')
-            print(" values:", values, '-->File "run.py", line 200')
-            print(" values:", values, '-->File "run.py", line 200')
             data = json.loads(values)
-            print(" data.get(key1, 'error'):", data.get('t1', 'error'), '-->File "run.py", line 206')
-            print(" data.get(key1, 'error'):", data.get('t1', 'error'), '-->File "run.py", line 206')
-            print(" data.get(key1, 'error'):", data.get('t1', 'error'), '-->File "run.py", line 206')
-            print(" data.get(key1, 'error'):", data.get('ctl', 'error'), '-->File "run.py", line 206')
 
 
             for i in range(len(v2config)):
-                print(" v2config:", v2config[i], '-->File "app.py", line 169')
-                print(" v2config:", v2config[i], '-->File "app.py", line 169')
-                print(" v2config:", v2config[i], '-->File "app.py", line 169')
                 key1 = v2config[i]['参数']
-                print(" key1:", key1, '-->File "run.py", line 216')
-                print(" key1:", key1, '-->File "run.py", line 216')
 
                 # v2config[i][key1] = data.get(key1, 'error')
                 tse[key1] = data.get(key1, 'error')
-                print(" tse:", tse, '-->File "run.py", line 221')
-                print(" tse:", tse, '-->File "run.py", line 221')
 
 
             socketio.emit('my_response',
