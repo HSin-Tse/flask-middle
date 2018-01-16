@@ -3,6 +3,9 @@ import Router from 'vue-router'
 const routerOptions = [
   { path: '/', component: 'Home' },
   { path: '/about', component: 'About' },
+  { path: '/page', component: 'Page' },
+  { path: '/h5click', component: 'H5click' },
+  { path: '/h5page', component: 'H5page' },
   { path: '*', component: 'NotFound' }
 ]
 const routes = routerOptions.map(route => {

@@ -163,7 +163,7 @@
       },
     },
     created() {
-
+      document.title='click';
       this.getClickRules();
       this.getClicksItems();
       this.getRandom();
