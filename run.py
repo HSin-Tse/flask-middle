@@ -43,11 +43,18 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_t
 APP_STATIC_TXT = os.path.join(APP_ROOT, 'static/jsons')  # 设置一个专门的类似全局变量的东西
 
 v2config = []
+v2pageconfig = []
 with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
     s = f.readlines()  # 读取前五个字节
 
     doc = json.loads(''.join(s))
     v2config = doc
+    f.close()
+with open(os.path.join(APP_STATIC_TXT, 'v2page.json'), encoding='utf-8') as f:
+    s = f.readlines()  # 读取前五个字节
+
+    doc = json.loads(''.join(s))
+    v2pageconfig = doc
     f.close()
 
 
@@ -71,11 +78,7 @@ def clickitems_v2():
         s = f.readlines()
 
         doc = json.loads(''.join(s))
-        v2config = doc
         f.close()
-    response = {
-        'randomNumber': randint(1, 100)
-    }
     return jsonify(doc)
 
 
@@ -83,7 +86,6 @@ def clickitems_v2():
 def click_v2():
     with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
         s = f.readlines()
-
         doc = json.loads(''.join(s))
         v2config = doc
 
@@ -93,6 +95,26 @@ def click_v2():
         for i in range(len(v2config)):
             # print(" v2config:", v2config[i], '-->File "app.py", line 169')
             key1 = v2config[i]['参数']
+            # v2config[i][key1] = argu.get(key1, 'error')
+            tse[key1] = key1
+
+        f.close()
+    return jsonify(tse)
+
+@app.route('/api/page/v2')
+def click_v2page():
+    with open(os.path.join(APP_STATIC_TXT, 'v2page.json'), encoding='utf-8') as f:
+        s = f.readlines()
+
+        doc = json.loads(''.join(s))
+        v2pageconfig = doc
+
+        tse = {
+            # 'URL': "init"
+        }
+        for i in range(len(doc)):
+            # print(" v2config:", v2config[i], '-->File "app.py", line 169')
+            key1 = v2pageconfig[i]['参数']
             # v2config[i][key1] = argu.get(key1, 'error')
             tse[key1] = key1
 
@@ -174,11 +196,6 @@ def home(url):
     isstatic = ("stat.ajmide.com" in request.url)
 
     if (isstatic):
-        print(" isv2page:", isv2page, '-->File "run.py", line 177')
-
-
-
-
 
         if isv2page:
             argu = request.args
@@ -188,15 +205,13 @@ def home(url):
                 'URL': request.url,
                 'body': urllib.parse.unquote(str(request.get_data()))
             }
-            for i in range(len(v2config)):
-                # print(" v2config:", v2config[i], '-->File "app.py", line 169')
-                key1 = v2config[i]['参数']
-                v2config[i][key1] = argu.get(key1, 'error')
+            for i in range(len(v2pageconfig)):
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                print(" v2config:", v2pageconfig[i], '-->File "app.py", line 169')
+                key1 = v2pageconfig[i]['参数']
+                v2pageconfig[i][key1] = argu.get(key1, 'error')
                 tse[key1] = argu.get(key1, 'error')
-                # print(" v2config:", v2config[i], '-->File "app.py", line 169')
-            # print(" v2config:", v2config, '-->File "app.py", line 173')
-
-            # print(" tse:", tse, '-->File "app.py", line 182')
 
             socketio.emit('my_response',
                           tse,

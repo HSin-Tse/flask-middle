@@ -100,7 +100,7 @@
           })
       },
       getClickRules() {
-        const path = `http://localhost:5001/api/click/v2`;
+        const path = `http://localhost:5001/api/page/v2`;
         axios.get(path)
           .then(response => {
             console.log('response.data:'+response.data);
