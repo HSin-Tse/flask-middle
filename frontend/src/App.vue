@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="container-fluid">
 
 
     <app-header>  </app-header>
@@ -8,6 +9,7 @@
       <router-view/>
     </transition>
 
+  </div>
   </div>
 </template>
 
