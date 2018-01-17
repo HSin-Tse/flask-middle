@@ -190,7 +190,7 @@ def home(url):
 
     ish5 = ("stat.ajmide.com/m.gif" in request.url)
     isstatic = ("stat.ajmide.com" in request.url)
-    
+
     if ish5:
         print(" ish5:", ish5, '-->File "run.py", line 191')
         print(" ish5:", ish5, '-->File "run.py", line 191')
