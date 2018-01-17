@@ -103,17 +103,11 @@
         const path = `http://localhost:5001/api/click/v2`;
         axios.get(path)
           .then(response => {
-            console.log('response.data:'+response.data);
-            console.log('response.data:'+response.data);
-            console.log('response.data:'+response.data);
 
             this.formThead = response.data
           })
           .catch(error => {
             console.log(error)
-            console.log('error:'+error);
-            console.log('error:'+error);
-            console.log('error:'+error);
           })
       },      deleteRow(index, rows) {
         this.tableData.splice(index, 1);
@@ -163,7 +157,6 @@
       },
     },
     created() {
-      document.title='click'
       this.getClickRules();
       this.getClicksItems();
       this.getRandom();

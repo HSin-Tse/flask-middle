@@ -163,7 +163,6 @@
       },
     },
     created() {
-      document.title=namespace
 
       this.getClickRules();
       this.getClicksItems();
