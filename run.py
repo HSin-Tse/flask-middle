@@ -87,12 +87,12 @@ def click_v2():
     with open(os.path.join(APP_STATIC_TXT, 'v2click.json'), encoding='utf-8') as f:
         s = f.readlines()
         doc = json.loads(''.join(s))
-        v2config = doc
+        # v2config = doc
 
         tse = {
             # 'URL': "init"
         }
-        for i in range(len(v2config)):
+        for i in range(len(doc)):
             # print(" v2config:", v2config[i], '-->File "app.py", line 169')
             key1 = v2config[i]['参数']
             # v2config[i][key1] = argu.get(key1, 'error')
@@ -172,7 +172,10 @@ def test_disconnect():
 @app.route('/', defaults={'url': ''})
 @app.route('/<path:url>', methods=['GET', 'POST'])
 def home(url):
-    # print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
+    print(" url:", url, '-->File "run.py", line 184')
     # print(" request.url):", request.url, '-->File "run.py", line 211')
 
     isaudio = ("t2" in request.url)
@@ -187,7 +190,13 @@ def home(url):
 
     ish5 = ("stat.ajmide.com/m.gif" in request.url)
     isstatic = ("stat.ajmide.com" in request.url)
+    
     if ish5:
+        print(" ish5:", ish5, '-->File "run.py", line 191')
+        print(" ish5:", ish5, '-->File "run.py", line 191')
+        print(" ish5:", ish5, '-->File "run.py", line 191')
+        print(" ish5:", ish5, '-->File "run.py", line 191')
+
         if True:
             argu = request.args
 
@@ -214,6 +223,11 @@ def home(url):
     elif isstatic:
 
         if isv2page:
+            print(" isv2page:", isv2page, '-->File "run.py", line 217')
+            print(" isv2page:", isv2page, '-->File "run.py", line 217')
+            print(" isv2page:", isv2page, '-->File "run.py", line 217')
+            print(" isv2page:", isv2page, '-->File "run.py", line 217')
+
             argu = request.args
 
             tse = {
@@ -234,9 +248,18 @@ def home(url):
                           namespace='/page')
 
         elif isv1:
+            print(" isv1:", isv1, '-->File "run.py", line 237')
+            print(" isv1:", isv1, '-->File "run.py", line 237')
+            print(" isv1:", isv1, '-->File "run.py", line 237')
+
             return ""
 
         elif isaudio:
+            print(" isaudio:", isaudio, '-->File "run.py", line 242')
+            print(" isaudio:", isaudio, '-->File "run.py", line 242')
+            print(" isaudio:", isaudio, '-->File "run.py", line 242')
+            print(" isaudio:", isaudio, '-->File "run.py", line 242')
+
             return ""
 
         elif (request.method == 'GET'):
@@ -255,14 +278,17 @@ def home(url):
                 # print(" v2config:", v2config[i], '-->File "app.py", line 169')
             # print(" v2config:", v2config, '-->File "app.py", line 173')
 
-            # print(" tse:", tse, '-->File "app.py", line 182')
+            print(" tse:", tse, '-->File "app.py", line 182')
+            print(" tse:", tse, '-->File "app.py", line 182')
+            print(" tse:", tse, '-->File "app.py", line 182')
+            print(" tse:", tse, '-->File "app.py", line 182')
+            print(" tse:", tse, '-->File "app.py", line 182')
 
             socketio.emit('my_response',
                           tse,
                           namespace='/test')
 
         elif (request.method == 'POST'):
-            # print(" request.url:", request.args, '-->File "runProxy.py", line 12')
             return ""
 
     with closing(
@@ -286,7 +312,6 @@ def home(url):
             resp_headers.append((name, value))
 
         response = Response(resp.content, resp.status_code, resp_headers)
-        # print(" response:", response, '-->File "run.py", line 255')
 
         return response
 
