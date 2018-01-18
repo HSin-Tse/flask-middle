@@ -4,8 +4,7 @@
     <div class="container-fluid">
       <h1>Ajmide Static Tool {{where}}</h1>
 
-      <h2>Receive:{{ conected}}</h2>
-      <h2>Receive:{{ isopen}}</h2>
+      <h2>Server:{{ conected}}    Receive: {{ isopen}}</h2>
       <el-tooltip :content="'接收: ' + isopen" placement="top">
         <el-switch
           v-model="isopen"
@@ -77,7 +76,7 @@
         tse: '',
         tableData: [],
         clickitems: [],
-        formThead: ['t1', 'vlu'],
+        formThead: [],
       }
     },
     methods: {
