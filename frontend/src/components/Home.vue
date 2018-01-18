@@ -72,7 +72,6 @@
         conected: 'disconnect',
         randomNumber: 0,
         total: 0,
-        value5: 'open',
         isopen: true,
         where: 'where',
         tse: '',
