@@ -5,6 +5,16 @@
       <h1>Ajmide Static Tool {{where}}</h1>
 
       <h2>Receive:{{ conected}}</h2>
+      <el-tooltip :content="'接收: ' + isopen" placement="top">
+        <el-switch
+          v-model="isopen"
+          active-color="#13ce66"
+          inactive-color="#666666"
+          active-value=true
+          inactive-value=false>
+        </el-switch>
+      </el-tooltip>
+
       <download-excel
         class="btn btn-primary"
         :data="tableData"
@@ -62,6 +72,8 @@
         conected: 'disconnect',
         randomNumber: 0,
         total: 0,
+        value5: 'open',
+        isopen: true,
         where: 'where',
         tse: '',
         tableData: [],
