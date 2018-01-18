@@ -59,7 +59,7 @@
   import axios from 'axios';
   import Vue from 'vue';
 
-  var namespace = '/test';
+  const namespace = '/test';
   import VueSocketio from 'vue-socket.io';
   import JsonExcel from 'vue-json-excel';
 
