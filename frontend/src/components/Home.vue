@@ -5,13 +5,13 @@
       <h1>Ajmide Static Tool {{where}}</h1>
 
       <h2>Receive:{{ conected}}</h2>
+      <h2>Receive:{{ isopen}}</h2>
       <el-tooltip :content="'接收: ' + isopen" placement="top">
         <el-switch
           v-model="isopen"
           active-color="#13ce66"
           inactive-color="#666666"
-          active-value=true
-          inactive-value=false>
+        >
         </el-switch>
       </el-tooltip>
 
@@ -120,7 +120,7 @@
           .catch(error => {
             console.log(error)
           })
-      },      deleteRow(index, rows) {
+      }, deleteRow(index, rows) {
         this.tableData.splice(index, 1);
       },
       tableRowClassName({row, rowIndex}) {
@@ -190,9 +190,11 @@
         console.log('socket init')
       },
       my_response(msg) {
-        this.total++
-        this.addLog(msg);
-
+        console.log(this.isopen);
+        if(this.isopen) {
+          this.total++;
+          this.addLog(msg);
+        }
       },
 
     }
