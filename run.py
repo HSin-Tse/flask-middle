@@ -67,6 +67,11 @@ def background_thread():
         count += 1
 
 
+
+@app.route('/api/h5')
+def h5md():
+    return render_template("READMEH5.md")
+
 @app.route('/toorv1')
 def toorv1():
     return render_template("toolv1.html")

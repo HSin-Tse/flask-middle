@@ -167,6 +167,10 @@
       },
     },
     created() {
+
+
+
+
       this.getClickRules();
       this.getClicksItems();
       this.getRandom();
