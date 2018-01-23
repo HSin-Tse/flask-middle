@@ -1,0 +1,2 @@
+webpackJsonp([8],{SoTi:function(e,t,n){"use strict";var r=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},s=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"app-container"},[n("iframe",{attrs:{src:"https://tse-ting.herokuapp.com",width:"100%",height:"1000px"}})])}],a={render:r,staticRenderFns:s};t.a=a},wDob:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n("SoTi"),s=n("VU/8"),a=s(null,r.a,!1,null,null,null);t.default=a.exports}});
+//# sourceMappingURL=8.c3a15dad637892ae43f2.js.map
