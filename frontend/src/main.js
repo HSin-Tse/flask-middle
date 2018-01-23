@@ -10,7 +10,7 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = true
 import '@/permission' // 权限
-
+import '@/icons' // icon
 
 /* eslint-disable no-new */
 new Vue({

@@ -46,12 +46,13 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value.length < 5) {
         callback(new Error('密码不能小于5位'))
-      }else if(value != 'iloveajmide'){
+      }else if(value != 'admin'){
         callback(new Error(value))
 
       }
       else {
         callback()
+
       }
     }
     return {
