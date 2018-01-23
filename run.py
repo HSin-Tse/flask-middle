@@ -183,11 +183,36 @@ def home(url):
     isv2page = ("p1=" in request.url)
 
     isv1 = ("session" in request.url)
+    # return render_template("index.html")
 
-    isvue = ("5001" in request.url)
+    isvue = ("9527" in request.url)
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+    print(" isvue:", isvue, '-->File "run.py", line 189')
+
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
+    print(" app.debug:", app.debug, '-->File "run.py", line 189')
 
     if isvue:
-        return requests.get('http://localhost:8080/{}'.format(url)).text
+        if app.debug:
+          return requests.get('http://localhost:8080/{}'.format(url)).text
+        else:
+          return render_template("index.html")
+
+    # if app.debug:
+    #     return requests.get('http://localhost:8080/{}'.format(url)).text
+    # else:
+    #     return render_template("index.html")
+
+
 
     ish5 = ("stat.ajmide.com/m.gif" in request.url)
     isstatic = ("stat.ajmide.com" in request.url)
@@ -296,4 +321,5 @@ def home(url):
 
 if __name__ == '__main__':
     # socketio.run(app, debug=True, port=5001)
-    socketio.run(app, debug=True, host="0.0.0.0", port=5001)
+    # socketio.run(app, debug=True, host="0.0.0.0", port=9527)
+    socketio.run(app, host="0.0.0.0", port=9527)
