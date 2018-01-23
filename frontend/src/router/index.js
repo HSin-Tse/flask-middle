@@ -1,43 +1,101 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const routerOptions = [
-  {path: '/', component: 'Home',meta: {title: 'click'}},
-  {path: '/about', component: 'About',meta: {title: 'about'}},
-  {path: '/page', component: 'Page',meta: {title: 'page'}},
-  {path: '/h5click', component: 'H5click',meta: {title: 'H5click'}},
-  {path: '/h5md', component: 'H5md',meta: {title: 'H5md'}},
-  {path: '/h5page', component: 'H5page',meta: {title: 'h5page'}},
-  {path: '*', component: 'NotFound',meta: {title: '404'}}
-];
+const _import = require('./_import_' + process.env.NODE_ENV)
+// in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
+// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
-routerOptions.forEach(function(value,index,array){
+Vue.use(Router)
 
-  console.log('value:'+JSON.stringify(value)+' index:'+index+' array:'+JSON.stringify(array));
-  // msg.vlu=JSON.stringify(msg.vlu)
+/* Layout */
+import Layout from '../views/layout/Layout.vue'
 
-})
-
-// console.log(routerOptions);
-// console.log(...routerOptions);
-
-const routes = routerOptions.map(route => {
-  return {
-    ...route,
-    component: () => import(`@/components/${route.component}.vue`)
+/**
+ * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
+ * redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    title: 'title'               the name show in submenu and breadcrumb (recommend set)
+    icon: 'svg-name'             the icon show in the sidebar,
   }
-});
-Vue.use(Router);
+ **/
+export const constantRouterMap = [
+  {path: '/login', component: _import('login/index'), hidden: true},
+  {path: '/404', component: _import('404'), hidden: true},
 
-const router=new Router({
-  routes,
-  mode: 'history'
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    name: 'Dashboard',
+    hidden: true,
+    children: [{
+      path: 'dashboard',
+      component: _import('dashboard/index')
+    }]
+  },
+  {
+    path: '/markdown',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: {title: '埋點', icon: 'example'},
+    children: [
+      {
+        path: 'app',
+        name: 'app',
+        component: _import('markdown/app'),
+        meta: {title: 'app', icon: 'table'}
+      },
+      {
+        path: 'h5',
+        name: 'h5',
+        component: _import('markdown/h5'),
+        meta: {title: 'h5', icon: 'tree'}
+      }
+    ]
+  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: {title: 'Example', icon: 'example'},
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: _import('table/index'),
+  //       meta: {title: 'Table', icon: 'table'}
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: _import('tree/index'),
+  //       meta: {title: 'Tree', icon: 'tree'}
+  //     }
+  //   ]
+  // },
+  //
+  // {
+  //   path: '/form',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: _import('form/index'),
+  //       meta: {title: 'Form', icon: 'form'}
+  //     }
+  //   ]
+  // },
+
+  {path: '*', redirect: '/404', hidden: true}
+]
+
+export default new Router({
+  // mode: 'history', //后端支持可开
+  scrollBehavior: () => ({y: 0}),
+  routes: constantRouterMap
 })
 
-router.beforeEach((to, from, next) => {
-  // console.log('global beforeEach');
-  // console.log(to);
-  document.title = to.meta.title
-  next();
-});
-export default router
