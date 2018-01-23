@@ -54,9 +54,20 @@ module.exports = {
           symbolId: 'icon-[name]'
         }
       },
+      // // webpack >= 2 multiple loaders
+      // {
+      //   test: /\.svg$/,
+      //
+      //   use: [
+      //     { loader: 'svg-sprite-loader', options: { symbolId: 'icon-[name]' } },
+      //     'svg-fill-loader',
+      //     'svgo-loader'
+      //   ]
+      // },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        exclude: [resolve('src/icons')],
         options: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
