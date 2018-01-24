@@ -322,4 +322,7 @@ def home(url):
 if __name__ == '__main__':
     # socketio.run(app, debug=True, port=5001)
     # socketio.run(app, debug=True, host="0.0.0.0", port=9527)
+
+    print(" port:")
     socketio.run(app, host="0.0.0.0", port=9527)
+
